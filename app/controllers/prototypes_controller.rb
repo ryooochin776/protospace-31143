@@ -31,11 +31,11 @@ class PrototypesController < ApplicationController
   end
 
   def update
-    prototype = Prototype.find(params[:id])
-    if prototype.update(prototype_params)
-      redirect_to prototype_patt(@prototype)
+    @prototype = Prototype.find(params[:id])
+    if @prototype.update(prototype_params)
+      redirect_to prototype_path(@prototype)
     else
-      render edit_prototype_path
+      render :edit
     end
   end
 
@@ -60,7 +60,7 @@ class PrototypesController < ApplicationController
 
   def contributor_confirmation
     unless user_signed_in?
-     redirect_to root_path 
+     redirect_to action: :index 
     end
   end
 end
